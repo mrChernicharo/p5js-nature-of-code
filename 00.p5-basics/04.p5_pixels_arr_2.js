@@ -6,7 +6,7 @@
 
 function setup() {
   createCanvas(200, 200);
-  pixelDensity(1); // doesn't get all pixels without this
+  pixelDensity(1); // doesn't get all pixels on highDensity screens without this
 }
 
 function draw() {
