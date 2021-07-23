@@ -1,20 +1,21 @@
 let pos, prev;
 function setup() {
-  createCanvas(400, 400);
-  pos = createVector(200, 200);
+  createCanvas(600, 600);
+  pos = createVector(300, 300);
   prev = pos.copy();
   background(53);
+  // frameRate(10);
 }
 function draw() {
-  stroke(255, 125);
+  stroke(255, 0, 125);
   strokeWeight(2);
 
-  let vel = p5.Vector.random2D().mult(2);
+  let vel = p5.Vector.random2D().mult(3);
 
-  // 1% chance of a great jump
+  // 3% chance of a great jump
   let r = random(100);
-  if (r < 1) {
-    vel.mult(25);
+  if (r < 3) {
+    vel.mult(random(4, 20));
   }
 
   line(pos.x, pos.y, prev.x, prev.y);

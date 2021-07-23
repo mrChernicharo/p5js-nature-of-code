@@ -3,7 +3,7 @@ function setup() {
   background(0);
 }
 function draw() {
-  translate(width / 2, height / 2); // origin in the middle
+  translate(width / 2, height / 2);
 
   let v = p5.Vector.random2D(); // Static Method
 

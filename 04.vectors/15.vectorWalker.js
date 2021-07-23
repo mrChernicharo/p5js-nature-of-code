@@ -2,6 +2,7 @@ function setup() {
   createCanvas(400, 400);
   pos = createVector(200, 200);
   background(53); // point leaves its trail on canvas
+  frameRate(10);
 }
 function draw() {
   //   background(53); // point's trail desapears

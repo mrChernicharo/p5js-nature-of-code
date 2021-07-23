@@ -7,10 +7,10 @@ let offsetX = 0;
 function draw() {
   background(60);
 
-  //   let x = map(random(), 0, 1, 0, width);
+  // let x = map(random(), 0, 1, 0, width);
 
   let x = map(noise(offsetX), 0, 1, 0, width);
-  offsetX += 0.01;
+  offsetX += 0.005;
 
   ellipse(x, height / 2, 40, 40);
 }

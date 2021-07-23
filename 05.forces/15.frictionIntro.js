@@ -61,9 +61,7 @@ let ballA;
 
 function setup() {
   createCanvas(600, 600);
-
-  //   frameRate(10);
-  ballA = new Ball(100, 200, 10); // x, y, mass
+  ballA = new Ball(200, 200, random(1, 10));
 }
 
 function draw() {
