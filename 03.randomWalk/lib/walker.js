@@ -1,14 +1,16 @@
-export class Walker {
+class Walker {
   constructor(x, y) {
     this.pos = createVector(x, y);
+    this.vel = createVector(0.5, 0);
   }
 
   update() {
-    this.pos.x = this.pos.x + random(-1, 1);
-    this.pos.y = this.pos.y + random(-1, 1);
+    this.pos.x = this.pos.x + this.vel.x;
+    this.pos.y = this.pos.y + this.vel.y;
   }
-
   show() {
-    point(this.pos.x, this.pos.y);
+    stroke('orangered');
+    strokeWeight(4);
+    ellipse(this.pos.x, this.pos.y, 20);
   }
 }
