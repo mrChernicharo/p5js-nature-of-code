@@ -8,9 +8,7 @@ function draw() {
 
   let v = createVector(-100, 50);
   stroke(225);
+  strokeWeight(4);
 
   line(0, 0, v.x, v.y);
-  ellipse(v.x, v.y, 10);
-
-  strokeWeight(4);
 }
