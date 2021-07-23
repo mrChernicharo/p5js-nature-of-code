@@ -2,13 +2,28 @@
 class Ball {
   constructor(x, y, mass) {
     this.pos = createVector(x, y);
-    this.vel = createVector(0, 0);
-    this.acc = createVector(0, 0);
-    this.r = mass * 2;
-    // this.mass = mass;
+    this.vel = createVector(0, 1);
+    this.acc = createVector(1, 0);
     this.mass = mass;
+    this.r = sqrt(this.mass) * 10;
   }
+  friction() {
+    let diff = height - (this.pos.y + this.r);
+    if (diff < 1) {
+      console.log('friction!');
 
+      // Direction of Friction
+      let friction = this.vel.copy();
+      friction.normalize();
+      friction.mult(-1);
+
+      // Magnitude of Friction
+      let mu = 0.1;
+      let normal = this.mass;
+      friction.setMag(mu * normal);
+      this.applyForce(friction);
+    }
+  }
   applyForce(force) {
     let f = p5.Vector.div(force, this.mass);
     this.acc.add(f);
@@ -42,39 +57,32 @@ class Ball {
 }
 
 /// sketch ///
+let ballA;
 
-let ballA, ballB;
-let noiseOffset = 0;
 function setup() {
   createCanvas(600, 600);
-  //  new Ball(x, x, mass)
-  ballA = new Ball(100, 100, 2);
-  ballB = new Ball(200, 100, 4);
+
+  //   frameRate(10);
+  ballA = new Ball(100, 200, 10); // x, y, mass
 }
 
 function draw() {
-  {
-    let color = map(noise(noiseOffset), 0, 1, 0, 255);
-    background(53);
-    fill(0, color, color);
-    noiseOffset += 0.1;
+  background(53);
+  fill(0, 200, 200);
+
+  if (mouseIsPressed) {
+    let wind = createVector(1, 0);
+    ballA.applyForce(wind);
   }
 
   let gravity = createVector(0, 1);
-  let wind = createVector(0.2, 0);
+  let weightA = p5.Vector.mult(gravity, ballA.mass);
+  ballA.applyForce(weightA);
 
-  ballA.applyForce(gravity);
-  ballB.applyForce(gravity);
-  if (mouseIsPressed) {
-    ballA.applyForce(wind);
-    ballB.applyForce(wind);
-  }
-  ballA.update();
-  ballB.update();
-  ballA.show();
-  ballB.show();
+  ballA.friction();
   ballA.limits();
-  ballB.limits();
+  ballA.update();
+  ballA.show();
 }
 
 document.querySelector('.text').innerText = 'click to make wind -->';
