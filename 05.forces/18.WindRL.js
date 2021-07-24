@@ -10,17 +10,19 @@ class Ball {
   friction() {
     let diff = height - (this.pos.y + this.r);
     if (diff < 1) {
-      console.log('friction!');
+      // friction is basicaly a force in the opposite direction of velocity
+      // so all below might be substitued by reducing the velocity slightly
+      this.vel.mult(0.95);
 
-      // Direction of Friction
-      let friction = this.vel.copy();
-      friction.normalize();
-      friction.mult(-1);
+      // // Direction of Friction
+      // let friction = this.vel.copy();
+      // friction.normalize();
+      // friction.mult(-1);
 
-      // Magnitude of Friction
-      let normal = this.mass;
-      friction.setMag(mu * normal);
-      this.applyForce(friction);
+      // // Magnitude of Friction
+      // let normal = this.mass;
+      // friction.setMag(mu * normal);
+      // this.applyForce(friction);
     }
   }
   applyForce(force) {
@@ -62,7 +64,7 @@ let balls = [];
 
 // lower mu, less friction
 // 0.5 ~ 0.005
-let mu = 0.05;
+let mu = 0.01;
 
 function setup() {
   createCanvas(600, 400);
@@ -76,8 +78,12 @@ function draw() {
 
   for (ball of balls) {
     if (mouseIsPressed) {
-      let wind = createVector(0.5, 0);
-      ball.applyForce(wind);
+      let windL = createVector(0.5, 0);
+      ball.applyForce(windL);
+    }
+    if (keyIsPressed == true) {
+      let windR = createVector(-0.5, 0);
+      ball.applyForce(windR);
     }
 
     let gravity = createVector(0, 1);
@@ -91,4 +97,4 @@ function draw() {
   }
 }
 
-document.querySelector('.text').innerText = 'click to make wind -->';
+document.querySelector('.text').innerText = 'Press < Key or Mouse > for wind';
